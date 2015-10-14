@@ -106,7 +106,8 @@ class Env {
             case is_numeric($var):
                 return $var;
             default:
-                if (substr($var, 0, 1) == substr($var, -1, 1)) {
+                $beginStr = substr($var, 0, 1);
+                if (in_array($beginStr, array('\'','"')) && $beginStr == substr($var, -1, 1)) {
                     return substr($var, 1, -1);
                 }
                 return $var;
