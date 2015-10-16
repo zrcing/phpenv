@@ -28,6 +28,6 @@ Easy to load system enivronment configuration from $\_ENV,$\_SERVER,getenv.
 	print_r($_SERVER);
 
 ## License
-Released under the [MIT license](http://www.opensoure.org/licenses/MIT).
+Released under the [MIT license](http://opensource.org/licenses/MIT).
 
 
