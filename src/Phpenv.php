@@ -3,13 +3,13 @@ namespace Phpenv;
 
 class Env {
     
-    protected static $loader = NULL;
+    private static $loader = NULL; //Singleton Loader
     
-    public $envFiles = array();
+    public $envFiles = array(); //All environment files path
     
-    public $lastEnvFile = NULL;
+    protected  $lastEnvFile = NULL;
     
-    public $overloader = false;
+    protected  $overloader = false;
     
     /**
      * Load environment config
@@ -36,8 +36,8 @@ class Env {
      * Singleton Loader
      */
     public static function getLoader() {
-        
-        if(self::$loader == NULL) {
+         
+        if(!(self::$loader instanceof self)) {
             self::$loader = new self();
         }
         return self::$loader;
