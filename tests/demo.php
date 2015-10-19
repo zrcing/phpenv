@@ -1,5 +1,5 @@
 <?php
-require '../src/Phpenv/Phpenv.php';
+require '../src/Phpenv/Env.php';
 use Phpenv\Env;
 
 
