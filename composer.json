@@ -1,7 +1,7 @@
 {
     "name": "zrcing/phpenv",
-    "description": "Loads environment",
-    "keywords": ["phpenv", "$_ENV", "$_SERVER", "getenv"],
+    "description": "Easy to load system enivronment configuration from $_ENV,$_SERVER,getenv.",
+    "keywords": ["phpenv", "\$_ENV", "\$_SERVER", "getenv"],
     "license": "MIT",
     "homepage": "https://github.com/zrcing/phpenv",
     "support": {
