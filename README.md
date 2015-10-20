@@ -1,5 +1,22 @@
 # PHP Env
 Easy to load system enivronment configuration from $\_ENV,$\_SERVER,getenv.
+##Installation
+Insstall the lastest version with
+	
+	$ composer require zrcing/phpenv
+	
+or 
+	
+	{
+		"name" : "project name",
+		"repositories" : [ {
+			"type" : "composer",
+			"url" : "https://packagist.org/"
+		}],
+		"require": {
+			"zrcing/phpenv": "~1.0"
+		}
+	}
 
 ##Demo
 ###Step 1: Created .env file
@@ -18,7 +35,7 @@ Easy to load system enivronment configuration from $\_ENV,$\_SERVER,getenv.
 	DB_SLAVE1_PWD="root"
 	DB_SLAVE1_PORT=3306
 
-###Step 2: Using
+###Step 2: Usage
 	use Phpenv\Env;
 
 	$envFile = realpath(".env");
