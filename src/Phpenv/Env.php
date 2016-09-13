@@ -28,7 +28,7 @@ class Env {
      */
     public static function overload($envFile = ".env") {
         
-        self::getLoader()->$overloader = true;
+        self::getLoader()->overloader = true;
         self::getLoader()->innerLoad($envFile);
     }
     
