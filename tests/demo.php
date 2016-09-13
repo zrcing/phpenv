@@ -27,6 +27,7 @@ ASSETS_URL="http://assets.test.com"
  */
 $envFile = realpath(".env");
 Env::load($envFile);
+// Env::overload($envFile);
 
 echo "DB_HOST: ".$_ENV["DB_HOST"];
 $_SERVER["DB_HOST"];
