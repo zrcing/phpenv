@@ -1,14 +1,33 @@
 <?php
+/**
+ * @author Liao Gengling <liaogling@gmail.com>
+ */
 namespace Phpenv;
 
-class Env {
-    
-    private static $loader = NULL; //Singleton Loader
-    
-    public $envFiles = array(); //All environment files path
-    
-    protected  $lastEnvFile = NULL;
-    
+use Phpenv\Exception\InvalidArgumentException;
+
+class Env implements EnvInterface
+{
+    /**
+     * Singleton Loader
+     * @var Env|null
+     */
+    private static $loader;
+
+    /**
+     * ll environment files path
+     * @var array
+     */
+    public $envFiles = array();
+
+    /**
+     * @var string|null
+     */
+    protected  $lastEnvFile;
+
+    /**
+     * @var bool
+     */
     protected  $overloader = false;
     
     /**
@@ -16,8 +35,8 @@ class Env {
      * 
      * @param string $envFile Absolute path
      */
-    public static function load($envFile = ".env") {
-        
+    public static function load($envFile = ".env")
+    {
         self::getLoader()->innerLoad($envFile);
     }
     
@@ -26,18 +45,20 @@ class Env {
      * 
      * @param string $envFile Absolute path
      */
-    public static function overload($envFile = ".env") {
-        
+    public static function overload($envFile = ".env")
+    {
         self::getLoader()->overloader = true;
         self::getLoader()->innerLoad($envFile);
     }
     
     /**
      * Singleton Loader
+     *
+     * @return Env
      */
-    public static function getLoader() {
-         
-        if(!(self::$loader instanceof self)) {
+    public static function getLoader()
+    {
+        if (! (self::$loader instanceof self)) {
             self::$loader = new self();
         }
         return self::$loader;
@@ -49,12 +70,12 @@ class Env {
      * @param string $envFile
      * @throws \InvalidArgumentException
      */
-    protected function innerLoad($envFile) {
-        
+    protected function innerLoad($envFile)
+    {
         $this->lastEnvFile = $envFile;
         
         if(!is_readable($this->lastEnvFile) || !is_file($this->lastEnvFile)) {
-            throw new \InvalidArgumentException(sprintf('Phpenv: [%s] file not found or no readable', $this->lastEnvFile));
+            throw new InvalidArgumentException(sprintf('Phpenv: [%s] file not found or no readable', $this->lastEnvFile));
         }
         $this->envFiles[$envFile] = $envFile;
         
@@ -79,8 +100,8 @@ class Env {
      * @param string $var
      * @return mixed
      */
-    protected function filter($var) {
-        
+    protected function filter($var)
+    {
         switch (true) {
             case strpos(trim($var), "#") === 0:
                 return null;
@@ -96,9 +117,10 @@ class Env {
      * Resolve variables
      * 
      * @param string $var
+     * @return string
      */
-    protected function handleSemanticsVar($var) {
-        
+    protected function handleSemanticsVar($var)
+    {
         list($var) = array_map("trim", explode("#", $var));
         switch (true) {
             case $var === "":
@@ -120,8 +142,8 @@ class Env {
      * @param string $key
      * @param mixed $val
      */
-    public static function setEnv($key, $val) {
-        
+    public static function setEnv($key, $val)
+    {
         if (self::getLoader()->overloader == false) {
             if(self::getEnv($key)) {
                 return;
@@ -138,8 +160,8 @@ class Env {
      * @param string $key
      * @return mixed
      */
-    public static function getEnv($key) {
-        
+    public static function getEnv($key)
+    {
         switch (true) {
             case array_key_exists($key, $_ENV):
                 return $_ENV[$key];
