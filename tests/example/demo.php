@@ -1,5 +1,5 @@
 <?php
-require '../src/Phpenv/Env.php';
+require '../../bootstrap.php';
 use Phpenv\Env;
 
 
