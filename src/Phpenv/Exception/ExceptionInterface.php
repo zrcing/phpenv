@@ -4,7 +4,7 @@
  */
 namespace Phpenv\Exception;
 
-interface ExceptonInterface
+interface ExceptionInterface
 {
 
 }
